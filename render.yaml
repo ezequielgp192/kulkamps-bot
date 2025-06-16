@@ -2,8 +2,8 @@ services:
   - type: web
     name: kulkamps-bot
     env: python
-    pythonVersion: 3.11.8
-    buildCommand: |
-      pip install -r requirements.txt
-      playwright install
-    startCommand: python main.py
+    plan: free
+    dockerfilePath: ./Dockerfile
+    branch: main
+    buildCommand: ""
+    startCommand: ""
