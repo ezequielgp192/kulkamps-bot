@@ -1,27 +1,18 @@
-# Usa Python 3.11 slim
-FROM python:3.11-slim
+# Usa imagem oficial do Playwright com Python 3.11 (Ubuntu Jammy)
+FROM mcr.microsoft.com/playwright/python:v1.43.0-jammy
 
-# Instala dependências para Playwright e builds Python
-RUN apt-get update && apt-get install -y \
-    curl wget gnupg ca-certificates fonts-liberation \
-    libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxkbcommon0 \
-    libxcomposite1 libxrandr2 libxdamage1 libxfixes3 libxext6 \
-    libx11-6 libglib2.0-0 libdbus-1-3 libdrm2 libgbm1 libasound2 \
-    libgtk-3-0 libxshmfence1 xvfb unzip build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
-# Define diretório do app
+# Diretório de trabalho
 WORKDIR /app
 
-# Copia todos os arquivos do repositório
+# Copia todos os arquivos do projeto
 COPY . .
 
-# Atualiza pip e instala dependências do Python
+# Atualiza pip e instala dependências
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-# Instala navegadores do Playwright com dependências
-RUN playwright install --with-deps
+# (Opcional) Instala navegadores do Playwright se não estiver usando a imagem playwright completa
+# RUN playwright install
 
-# Comando padrão para iniciar a aplicação
+# Comando padrão para rodar seu bot
 CMD ["python", "main.py"]
