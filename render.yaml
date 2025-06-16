@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: kulkamps-bot
-    env: docker
-    plan: free
-    dockerfilePath: ./Dockerfile
-    branch: main
-    buildCommand: ""
-    startCommand: ""
